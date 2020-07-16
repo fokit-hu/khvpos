@@ -1,6 +1,7 @@
 {
     "name": "connorhu/khbanktools",
     "description": "Helper tools for working with systems of K&H Bank and their file formats.",
+    "license": "MIT",
     "type": "library",
     "require": {
         "psr/http-client": "^1.0"
