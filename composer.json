@@ -1,0 +1,10 @@
+{
+    "require": {
+        "psr/http-client": "^1.0"
+    },
+    "require-dev": {
+        "symfony/http-client": "^5.1",
+        "symfony/var-dumper": "^5.1",
+        "nyholm/psr7": "^1.3"
+    }
+}
