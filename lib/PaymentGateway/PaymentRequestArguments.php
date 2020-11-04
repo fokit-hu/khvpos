@@ -57,7 +57,7 @@ class PaymentRequestArguments
                 return self::CURRENCY_USD;
         }
         
-        throw new \LogicException('Unknown currency: '. $transaction->getCurrency());
+        throw new \LogicException(sprintf('Unknown currency: "%s".', $transaction->getCurrency()));
     }
     
     private $merchantId;
@@ -79,7 +79,7 @@ class PaymentRequestArguments
     public function setTransactionId(int $transactionId): self
     {
         if ($transactionId === 0 || $transactionId > 9999999999) {
-            throw new \LogicException('Invalid transaction id: '. $transactionId);
+            throw new \LogicException(sprintf('Invalid transaction id: %d', $transactionId));
         }
         
         $this->transactionId = $transactionId;

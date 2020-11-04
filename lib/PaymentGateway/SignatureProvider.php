@@ -11,7 +11,7 @@ class SignatureProvider
     public function __construct(string $privateKeyPath, ?string $privateKeyPassphrase = null)
     {
         if (!\is_file($privateKeyPath)) {
-            throw new \LogicException('Private Key not exists at path: '. $privateKeyPath);
+            throw new \LogicException(sprintf('Private Key not exists at path: "%s".', $privateKeyPath));
         }
         
         if (!\function_exists('openssl_sign')) {
@@ -38,7 +38,7 @@ class SignatureProvider
         
         if ($this->privateKey === false) {
             $error = $this->getLastOpenSSLErrorMessage();
-            throw new \LogicException('Failed to read private key. OpenSSL error: '. $error);
+            throw new \LogicException(sprintf('Failed to read private key. OpenSSL error: "%s".', $error));
         }
         
         return true;
