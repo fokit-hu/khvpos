@@ -6,36 +6,28 @@ use Psr\Http\Client\ClientInterface;
 
 class PaymentGateway
 {
-    const LANGUAGE_CODE_HU = 'HU';
     const LANGUAGE_CODE_DE = 'DE';
-    const LANGUAGE_CODE_ES = 'ES';
     const LANGUAGE_CODE_EN = 'EN';
-    const LANGUAGE_CODE_FI = 'FI';
+    const LANGUAGE_CODE_ES = 'ES';
     const LANGUAGE_CODE_FR = 'FR';
+    const LANGUAGE_CODE_HU = 'HU';
     const LANGUAGE_CODE_IT = 'IT';
-    const LANGUAGE_CODE_NL = 'NL';
-    const LANGUAGE_CODE_NO = 'NO';
     const LANGUAGE_CODE_PL = 'PL';
     const LANGUAGE_CODE_PT = 'PT';
     const LANGUAGE_CODE_RO = 'RO';
     const LANGUAGE_CODE_SK = 'SK';
-    const LANGUAGE_CODE_SV = 'SV';
     
     const LANGUAGE_CODES = [
-        self::LANGUAGE_CODE_HU,
         self::LANGUAGE_CODE_DE,
-        self::LANGUAGE_CODE_ES,
         self::LANGUAGE_CODE_EN,
-        self::LANGUAGE_CODE_FI,
+        self::LANGUAGE_CODE_ES,
         self::LANGUAGE_CODE_FR,
+        self::LANGUAGE_CODE_HU,
         self::LANGUAGE_CODE_IT,
-        self::LANGUAGE_CODE_NL,
-        self::LANGUAGE_CODE_NO,
         self::LANGUAGE_CODE_PL,
         self::LANGUAGE_CODE_PT,
         self::LANGUAGE_CODE_RO,
         self::LANGUAGE_CODE_SK,
-        self::LANGUAGE_CODE_SV,
     ];
     
     const PAYMENT_ENDPOINT_PATH = '/PGPayment';
