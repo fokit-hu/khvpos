@@ -78,7 +78,7 @@ class PaymentRequestArguments
     
     public function setTransactionId(int $transactionId): self
     {
-        if ($transactionId === 0 || $transactionId > 9999999999) {
+        if ($transactionId <= 0 || $transactionId > 9999999999) {
             throw new \LogicException(sprintf('Invalid transaction id: %d', $transactionId));
         }
         
