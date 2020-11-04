@@ -97,7 +97,7 @@ class PaymentRequestArguments
     public function setPaymentType(string $paymentType): self
     {
         if (!in_array($paymentType, self::PAYMENT_TYPES)) {
-            throw new \LogicException('Invalid payment type: '.$paymentType);
+            throw new \LogicException(sprintf('Invalid payment type: "%s".', $paymentType));
         }
         
         $this->paymentType = $paymentType;
@@ -129,7 +129,7 @@ class PaymentRequestArguments
     public function setCurrency(string $currency): self
     {
         if (!\in_array($currency, self::CURRENCIES)) {
-            throw new \LogicException('Invalid Currency: '.$currency);
+            throw new \LogicException(sprintf('Invalid Currency: "%s"', $currency));
         }
             
         $this->currency = $currency;
