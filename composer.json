@@ -16,5 +16,10 @@
         "psr-4": {
             "KHBankTools\\": "lib/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KHBankTools\\Tests\\": "tests/"
+        }
     }
 }

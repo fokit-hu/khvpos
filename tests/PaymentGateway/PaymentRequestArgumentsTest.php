@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace PaymentGatewayTests;
+namespace KHBankTools\Tests\PaymentGateway;
 
 use KHBankTools\PaymentGateway\PaymentRequestArguments;
 use PHPUnit\Framework\TestCase;
