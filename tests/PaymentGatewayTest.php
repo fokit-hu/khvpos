@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace PaymentGatewayTests;
+
 use KHBankTools\PaymentGateway\PaymentGateway;
 use KHBankTools\PaymentGateway\SignatureProvider;
 use PHPUnit\Framework\TestCase;
@@ -9,7 +11,7 @@ class PaymentGatewayTest extends TestCase
 {
     private function getAccessibleMethod(string $className, string $method)
     {
-        $paymentGateway = new ReflectionClass($className);
+        $paymentGateway = new \ReflectionClass($className);
         $method = $paymentGateway->getMethod($method);
         $method->setAccessible(true);
         
