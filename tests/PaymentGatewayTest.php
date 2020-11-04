@@ -19,7 +19,7 @@ class PaymentGatewayTest extends TestCase
     public function testHost(): void
     {
         $httpClient = new Psr18Client();
-        $signatureProvider = new SignatureProvider(__DIR__.'/test_private_key.pem');
+        $signatureProvider = new SignatureProvider(__DIR__.'/Fixtures/test1_private_key.pem');
         $publicGetHostMethod = $this->getAccessibleMethod(PaymentGateway::class, 'getEndpointBase');
 
         $paymentGateway = new PaymentGateway(1234, $signatureProvider, true);
