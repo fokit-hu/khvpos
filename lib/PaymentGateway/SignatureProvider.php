@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace KHBankTools\PaymentGateway;
 
@@ -8,7 +8,7 @@ class SignatureProvider
     private $privateKeyPassphrase;
     private $privateKey;
     
-    public function __construct(string $privateKeyPath, ?string $privateKeyPassphrase = null)
+    public function __construct(string $privateKeyPath, string $privateKeyPassphrase = '', bool $lazyKeyload = true)
     {
         if (!\is_file($privateKeyPath)) {
             throw new \LogicException(sprintf('Private Key not exists at path: "%s".', $privateKeyPath));
@@ -18,33 +18,28 @@ class SignatureProvider
             throw new \LogicException('OpenSSL extension is required.');
         }
 
-        $this->privateKeyPath = $privateKeyPath;
-        $this->privateKeyPassphrase = $privateKeyPassphrase;
+        if ($lazyKeyload === true) {
+            $this->privateKeyPath = $privateKeyPath;
+            $this->privateKeyPassphrase = $privateKeyPassphrase;
+        }
+        else {
+            $this->privateKey = self::doLoadKey(file_get_contents($privateKeyPath), $privateKeyPassphrase);
+        }
     }
     
-    private function loadKey()
+    private static function doLoadKey(string $privateKeyString, string $passphrase = '')/* : resource */
     {
-        if ($this->privateKey !== null) {
-            return;
-        }
+        $privateKey = \openssl_get_privatekey($privateKeyString, $passphrase);
         
-        $passphrase = '';
-        
-        if (!empty($this->privateKeyPassphrase)) {
-            $passphrase = $this->privateKeyPassphrase;
-        }
-        
-        $this->privateKey = \openssl_get_privatekey('file://'.$this->privateKeyPath);
-        
-        if ($this->privateKey === false) {
-            $error = $this->getLastOpenSSLErrorMessage();
+        if ($privateKey === false) {
+            $error = self::getLastOpenSSLErrorMessage();
             throw new \LogicException(sprintf('Failed to read private key. OpenSSL error: "%s".', $error));
         }
         
-        return;
+        return $privateKey;
     }
     
-    private function getLastOpenSSLErrorMessage(): string
+    private static function getLastOpenSSLErrorMessage(): string
     {
         $buffer = '';
         while ($message = \openssl_error_string()) {
@@ -54,9 +49,18 @@ class SignatureProvider
         return $buffer;
     }
     
+    private function loadKey(): void
+    {
+        if ($this->privateKey !== null) {
+            return;
+        }
+        
+        $this->privateKey = self::doLoadKey(file_get_contents($this->privateKeyPath), $this->privateKeyPassphrase);
+    }
+    
     public function __destruct()
     {
-        if ($this->privateKey !== null && PHP_VERSION_ID < 80000) {
+        if (is_resource($this->privateKey) && PHP_VERSION_ID < 80000) {
             \openssl_free_key($this->privateKey);
         }
     }
