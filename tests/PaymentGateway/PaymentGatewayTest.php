@@ -52,8 +52,8 @@ class PaymentGatewayTest extends TestCase
     public function buildQueryDataProvider(): array
     {
         return [
-            [PaymentGateway::LANGUAGE_CODE_HU, 'mid=60000&txid=1234&type=PU&amount=1231300&ccy=EUR&sign=10f97ff0d608a6cf396ff7d3bf86df859b48e701ed1990db5cc11922a5a80e6b8c906397de7319f1354d5b3a2973376716478ae0ee97e780331854c6d7dc0685f4a2efcb84737c00575ca8eca638ea355abac4226de984b9378d64121092a453a5d55b32a8b72dd729a2c339b08d73baaf498238ceb4d846f992ef02290ec0bc'],
-            [PaymentGateway::LANGUAGE_CODE_EN, 'mid=60000&txid=1234&type=PU&amount=1231300&ccy=EUR&sign=10f97ff0d608a6cf396ff7d3bf86df859b48e701ed1990db5cc11922a5a80e6b8c906397de7319f1354d5b3a2973376716478ae0ee97e780331854c6d7dc0685f4a2efcb84737c00575ca8eca638ea355abac4226de984b9378d64121092a453a5d55b32a8b72dd729a2c339b08d73baaf498238ceb4d846f992ef02290ec0bc&lang=EN'],
+            [PaymentGateway::LANGUAGE_CODE_HU, 'mid=60000&txid=1234&type=PU&amount=12313&ccy=EUR&sign=9065ac36827e8bb68cd757d6428778083d3f5d289a32cd00aa546df9b54bdf62f69c3883a4b036ba6691bd1cb70f8e7784053285b367242e0d798d0a07c3044149c880b3d9694f7289a160d6c405a48a0a94e1bdab9e615f190437e017d3f9d49ddd636ea0b227a17030c2406393ed9d94f64f4b5302e060e7f81af3a28b0f15'],
+            [PaymentGateway::LANGUAGE_CODE_EN, 'mid=60000&txid=1234&type=PU&amount=12313&ccy=EUR&sign=9065ac36827e8bb68cd757d6428778083d3f5d289a32cd00aa546df9b54bdf62f69c3883a4b036ba6691bd1cb70f8e7784053285b367242e0d798d0a07c3044149c880b3d9694f7289a160d6c405a48a0a94e1bdab9e615f190437e017d3f9d49ddd636ea0b227a17030c2406393ed9d94f64f4b5302e060e7f81af3a28b0f15&lang=EN'],
         ];
     }
     
@@ -106,8 +106,8 @@ class PaymentGatewayTest extends TestCase
         $transaction->currency = TransactionInterface::TRANSACTION_EUR_CURRENCY;
 
         return [
-            [$transaction, PaymentGateway::LANGUAGE_CODE_HU, 'https://pay.khpos.hu/pay/v1/PGPayment?mid=60000&txid=678&type=PU&amount=1234500&ccy=EUR&sign=7a6acb493e94f15d1b76e25a387f832b19fb548eb82f9464a62dc08ad7f47c3b1cc6ef5315e495b7e4890228a2599101f7aac8fb923e75e23c6d500e63c91a32556a6604c4c3c0320067f6a58366b91096f02ae60b000d93189edf18e9c3f7c3f3876c45a4283fb4771df6883a3826862e696bf5d5a14a38f860567aa2ea3e76'],
-            [$transaction, PaymentGateway::LANGUAGE_CODE_EN, 'https://pay.khpos.hu/pay/v1/PGPayment?mid=60000&txid=678&type=PU&amount=1234500&ccy=EUR&sign=7a6acb493e94f15d1b76e25a387f832b19fb548eb82f9464a62dc08ad7f47c3b1cc6ef5315e495b7e4890228a2599101f7aac8fb923e75e23c6d500e63c91a32556a6604c4c3c0320067f6a58366b91096f02ae60b000d93189edf18e9c3f7c3f3876c45a4283fb4771df6883a3826862e696bf5d5a14a38f860567aa2ea3e76&lang=EN'],
+            [$transaction, PaymentGateway::LANGUAGE_CODE_HU, 'https://pay.khpos.hu/pay/v1/PGPayment?mid=60000&txid=678&type=PU&amount=12345&ccy=EUR&sign=782ab24d0ea1494c4d1cbb6db768365ec364b8d671cbb15e42ec12b79de98675aa2d00e4667c7973de9933fea346e6ce0459b03e1323d4696d8df7059f9155cccceee71fb87192ffecc6780683e72ac1bda36d1c95160414c3b87fda92242dfc28b8c6ea0022d21f5ec4ee5e5a356a258ac8a6529df08eb179d5ec64a980a5a0'],
+            [$transaction, PaymentGateway::LANGUAGE_CODE_EN, 'https://pay.khpos.hu/pay/v1/PGPayment?mid=60000&txid=678&type=PU&amount=12345&ccy=EUR&sign=782ab24d0ea1494c4d1cbb6db768365ec364b8d671cbb15e42ec12b79de98675aa2d00e4667c7973de9933fea346e6ce0459b03e1323d4696d8df7059f9155cccceee71fb87192ffecc6780683e72ac1bda36d1c95160414c3b87fda92242dfc28b8c6ea0022d21f5ec4ee5e5a356a258ac8a6529df08eb179d5ec64a980a5a0&lang=EN'],
         ];
     }
     
@@ -130,8 +130,8 @@ class PaymentGatewayTest extends TestCase
         $transaction->currency = TransactionInterface::TRANSACTION_EUR_CURRENCY;
 
         return [
-            [$transaction, PaymentGateway::LANGUAGE_CODE_HU, 'https://pay.khpos.hu/pay/v1/PGPayment?mid=60000&txid=678&type=RE&amount=1234500&ccy=EUR&sign=240d33e15003a3412ee28c8fc6ede3cb9135f5698de442a6bea17df5141be6cac3332b1ce05d70d0d9554218a485dfcd5947acebe2c9cc68d5461b58ac148022cc09fc631b386e7abee645400709d4412ea18d1fd6ef53266673d8a8abfb91be25187590533dd1c61da858969a7e2e99ec6c62b9946bca0871469041cbea540f'],
-            [$transaction, PaymentGateway::LANGUAGE_CODE_EN, 'https://pay.khpos.hu/pay/v1/PGPayment?mid=60000&txid=678&type=RE&amount=1234500&ccy=EUR&sign=240d33e15003a3412ee28c8fc6ede3cb9135f5698de442a6bea17df5141be6cac3332b1ce05d70d0d9554218a485dfcd5947acebe2c9cc68d5461b58ac148022cc09fc631b386e7abee645400709d4412ea18d1fd6ef53266673d8a8abfb91be25187590533dd1c61da858969a7e2e99ec6c62b9946bca0871469041cbea540f&lang=EN'],
+            [$transaction, PaymentGateway::LANGUAGE_CODE_HU, 'https://pay.khpos.hu/pay/v1/PGPayment?mid=60000&txid=678&type=RE&amount=12345&ccy=EUR&sign=63187e3ce1800e913761a4f716500ef92a135450a60b8565c53de5fdcd974f06e32bca4d0636b90a8208d61b398d1e1abd65d3e6cfd1b15b115cd001a00ea6f79fa392eaeb74c16380430a88b850ef1a8069bb87eaffe2d1be431eb60a490d1c979d1fc736d97642d2533f4f5c35fc7ec5761d58166d93492d0a695b4cf74adf'],
+            [$transaction, PaymentGateway::LANGUAGE_CODE_EN, 'https://pay.khpos.hu/pay/v1/PGPayment?mid=60000&txid=678&type=RE&amount=12345&ccy=EUR&sign=63187e3ce1800e913761a4f716500ef92a135450a60b8565c53de5fdcd974f06e32bca4d0636b90a8208d61b398d1e1abd65d3e6cfd1b15b115cd001a00ea6f79fa392eaeb74c16380430a88b850ef1a8069bb87eaffe2d1be431eb60a490d1c979d1fc736d97642d2533f4f5c35fc7ec5761d58166d93492d0a695b4cf74adf&lang=EN'],
         ];
     }
     

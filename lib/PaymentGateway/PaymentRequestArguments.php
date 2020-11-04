@@ -39,7 +39,7 @@ class PaymentRequestArguments
         else {
             $this->setTransactionId($transactionId);
             $this->setPaymentType($paymentType);
-            $this->setAmount((int)($amount *= 100));
+            $this->setAmount($amount);
             $this->setCurrency($currency);
         }
     }

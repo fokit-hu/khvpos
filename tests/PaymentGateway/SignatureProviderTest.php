@@ -81,7 +81,7 @@ class SignatureProviderTest extends TestCase
         $signatureProvider = new SignatureProvider(__DIR__.'/Fixtures/test1_private_key.pem');
         $arguments = new PaymentRequestArguments(PaymentRequestArguments::PAYMENT_PURCHASE_TYPE, 1234, (int) (123.13*100), PaymentRequestArguments::CURRENCY_EUR);
         $arguments->setMerchantId(60000);
-        $this->assertSame($this->callPrivateMethod($signatureProvider, 'buildQueryToSign', [$arguments]), 'mid=60000&txid=1234&type=PU&amount=1231300&ccy=EUR');
+        $this->assertSame($this->callPrivateMethod($signatureProvider, 'buildQueryToSign', [$arguments]), 'mid=60000&txid=1234&type=PU&amount=12313&ccy=EUR');
     }
     
     public function testBuildQueryToSignWithoutMerchantId(): void
@@ -102,6 +102,6 @@ class SignatureProviderTest extends TestCase
 
         $signature = $signatureProvider->sign($arguments);
 
-        $this->assertSame(openssl_verify('mid=60000&txid=1234&type=PU&amount=1231300&ccy=EUR', hex2bin($signature), $publicKey, OPENSSL_ALGO_SHA1), 1);
+        $this->assertSame(openssl_verify('mid=60000&txid=1234&type=PU&amount=12313&ccy=EUR', hex2bin($signature), $publicKey, OPENSSL_ALGO_SHA1), 1);
     }
 }
