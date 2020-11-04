@@ -56,7 +56,7 @@ class SignatureProvider
     
     public function __destruct()
     {
-        if ($this->privateKey !== null) {
+        if ($this->privateKey !== null && PHP_VERSION_ID < 80000) {
             \openssl_free_key($this->privateKey);
         }
     }
