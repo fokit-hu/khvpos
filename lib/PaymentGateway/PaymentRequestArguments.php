@@ -119,7 +119,7 @@ class PaymentRequestArguments
         return $this;
     }
     
-    public function getAmount(): int
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -137,7 +137,7 @@ class PaymentRequestArguments
         return $this;
     }
     
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
