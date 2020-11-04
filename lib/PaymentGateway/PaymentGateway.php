@@ -30,6 +30,7 @@ class PaymentGateway
         self::LANGUAGE_CODE_SK,
     ];
     
+    const VERSION = 'v1';
     const PAYMENT_ENDPOINT_PATH = '/PGPayment';
     const RESULT_ENDPOINT_PATH = '/PGResult';
     
@@ -46,9 +47,9 @@ class PaymentGateway
         $this->httpClient = $httpClient;
     }
 
-    protected function getHost()
+    protected function getEndpointBase()
     {
-        return 'https://ebank.khb.hu/PaymentGateway'. ($this->isTest ? 'Test' : '');
+        return 'https://pay.'. ($this->isTest ? 'sandbox.' : '').'khpos.hu/pay/'.self::VERSION;
     }
     
     private function buildQuery(PaymentRequestArguments $arguments, ?string $languageCode = null): string
@@ -94,7 +95,7 @@ class PaymentGateway
     
     public function paymentUrl(TransactionInterface $transaction, $languageCode = self::LANGUAGE_CODE_HU): string
     {
-        $url = $this->getHost();
+        $url = $this->getEndpointBase();
         $paymentArguments = $this->transactionToPaymentRequestArguments($transaction, PaymentRequestArguments::PAYMENT_PURCHASE_TYPE);
         $url .= self::PAYMENT_ENDPOINT_PATH.'?'.$this->buildQuery($paymentArguments, $languageCode);
         
@@ -103,7 +104,7 @@ class PaymentGateway
 
     public function refundUrl(TransactionInterface $transaction, $languageCode = self::LANGUAGE_CODE_HU): string
     {
-        $url = $this->getHost();
+        $url = $this->getEndpointBase();
         $paymentArguments = $this->transactionToPaymentRequestArguments($transaction, PaymentRequestArguments::PAYMENT_REFUND_TYPE);
         $url .= self::PAYMENT_ENDPOINT_PATH.'?'.$this->buildQuery($paymentArguments, $languageCode);
         
@@ -112,7 +113,7 @@ class PaymentGateway
     
     public function paymentResultCheckUrl(TransactionInterface $transaction): string
     {
-        $url = $this->getHost();
+        $url = $this->getEndpointBase();
         $paymentArguments = $this->transactionToPaymentRequestArguments($transaction, PaymentRequestArguments::PAYMENT_RESULT_TYPE);
         $url .= self::RESULT_ENDPOINT_PATH.'?'.$this->buildQuery($paymentArguments);
         
