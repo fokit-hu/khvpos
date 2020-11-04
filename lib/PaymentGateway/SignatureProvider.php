@@ -22,10 +22,10 @@ class SignatureProvider
         $this->privateKeyPassphrase = $privateKeyPassphrase;
     }
     
-    private function loadKey(): bool
+    private function loadKey()
     {
         if ($this->privateKey !== null) {
-            return true;
+            return;
         }
         
         $passphrase = '';
@@ -41,7 +41,7 @@ class SignatureProvider
             throw new \LogicException(sprintf('Failed to read private key. OpenSSL error: "%s".', $error));
         }
         
-        return true;
+        return;
     }
     
     private function getLastOpenSSLErrorMessage(): string
