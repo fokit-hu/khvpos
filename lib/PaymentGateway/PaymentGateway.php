@@ -120,7 +120,7 @@ class PaymentGateway
         return $url;
     }
     
-    public function getPaymentResult(TransactionInterface $transaction): PaymentResult
+    protected function fetchPaymentStatus(TransactionInterface $transaction): string
     {
         if ($this->httpClient === null) {
             throw new \LogicException('http client not initialized for payment result check');
@@ -129,6 +129,11 @@ class PaymentGateway
         $request = $this->httpClient->createRequest('GET', $this->paymentResultCheckUrl($transaction));
         $response = $this->httpClient->sendRequest($request);
         
-        return PaymentResult::initWithResponeString($response->getBody()->getContents());
+        return $response->getBody()->getContents();
+    }
+    
+    public function getPaymentResult(TransactionInterface $transaction): PaymentResult
+    {
+        return PaymentResult::initWithResponeString($this->fetchPaymentStatus($transaction));
     }
 }
