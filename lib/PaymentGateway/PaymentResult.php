@@ -4,6 +4,36 @@ namespace KHBankTools\PaymentGateway;
 
 class PaymentResult
 {
+    /**
+     * @var int
+     */
+    private $status;
+
+    /**
+     * @var string
+     */
+    private $statusString;
+
+    /**
+     * @var int
+     */
+    private $responseCode;
+
+    /**
+     * @var string|null
+     */
+    private $responseMessage;
+
+    /**
+     * @var int
+     */
+    private $bankLicenceNumber;
+
+    /**
+     * @var string|null
+     */
+    private $emailAddress;
+
     public function __construct(string $bankStatusString, ?string $responseCode, ?string $responseMessage, ?string $bankLicenceNumber, ?string $emailAddress)
     {
         $this->status = self::bankStatusStringToTransactionStatus($bankStatusString);
