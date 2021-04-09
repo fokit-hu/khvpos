@@ -56,7 +56,7 @@ class PaymentResult
         return new self($resultArray[0], null, null, null, null);
     }
     
-    public static function bankStatusStringToTransactionStatus($string)
+    public static function bankStatusStringToTransactionStatus($string): int
     {
         switch ($string) {
             case 'NAK':
