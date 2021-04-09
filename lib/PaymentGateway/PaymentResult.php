@@ -44,7 +44,7 @@ class PaymentResult
         $this->emailAddress = empty($emailAddress) ? null : $emailAddress;
     }
     
-    public static function initWithResponeString(string $responseString): self
+    public static function initWithResponseString(string $responseString): self
     {
         $resultArray = \explode("\n", $responseString);
         $resultArray = \array_map('trim', $resultArray);

@@ -4,6 +4,7 @@
     "license": "MIT",
     "type": "library",
     "require": {
+        "php": ">=7.4.*",
         "psr/http-client": "^1.0"
     },
     "require-dev": {
