@@ -74,7 +74,7 @@ class PaymentResult
             case 'PEN':
                 return TransactionInterface::TRANSACTION_STATUS_PENDING;
             case 'PE2':
-                return TransactionInterface::TRANSACTION_STATUS_REFOUND_PENDING;
+                return TransactionInterface::TRANSACTION_STATUS_REFUND_PENDING;
             case 'ERR':
                 return TransactionInterface::TRANSACTION_STATUS_ERROR;
             case 'CAN':
@@ -84,7 +84,7 @@ class PaymentResult
             case 'ACK':
                 return TransactionInterface::TRANSACTION_STATUS_ACKNOWLEDGED;
             case 'VOI':
-                return TransactionInterface::TRANSACTION_STATUS_REFOUNDED;
+                return TransactionInterface::TRANSACTION_STATUS_REFUNDED;
         }
 
         return TransactionInterface::TRANSACTION_STATUS_UNKNOWN;

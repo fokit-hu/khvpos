@@ -6,7 +6,7 @@ class PaymentRequestArguments
 {
     const PAYMENT_PURCHASE_TYPE = 'PU';
     const PAYMENT_REFUND_TYPE = 'RE';
-    const PAYMENT_RESULT_TYPE = '_RES'; // inernal type for payment result requests
+    const PAYMENT_RESULT_TYPE = '_RES'; // internal type for payment result requests
 
     const PAYMENT_TYPES = [
         self::PAYMENT_PURCHASE_TYPE,
