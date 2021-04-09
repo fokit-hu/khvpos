@@ -34,10 +34,10 @@ class PaymentGateway
     const PAYMENT_ENDPOINT_PATH = '/PGPayment';
     const RESULT_ENDPOINT_PATH = '/PGResult';
     
-    private $signatureProvider;
-    private $merchantId;
-    private $isTest;
-    private $httpClient;
+    private SignatureProvider $signatureProvider;
+    private int $merchantId;
+    private bool $isTest;
+    private ?ClientInterface $httpClient;
     
     public function __construct(int $merchantId, SignatureProvider $signatureProvider, bool $isTest = false, ClientInterface $httpClient = null)
     {
