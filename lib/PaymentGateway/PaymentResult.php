@@ -7,32 +7,32 @@ class PaymentResult
     /**
      * @var int
      */
-    private $status;
+    private int $status;
 
     /**
      * @var string
      */
-    private $statusString;
+    private string $statusString;
 
     /**
      * @var int
      */
-    private $responseCode;
+    private int $responseCode;
 
     /**
      * @var string|null
      */
-    private $responseMessage;
+    private ?string $responseMessage = null;
 
     /**
      * @var int
      */
-    private $bankLicenceNumber;
+    private int $bankLicenceNumber;
 
     /**
      * @var string|null
      */
-    private $emailAddress;
+    private ?string $emailAddress = null;
 
     public function __construct(string $bankStatusString, ?string $responseCode, ?string $responseMessage, ?string $bankLicenceNumber, ?string $emailAddress)
     {
