@@ -4,8 +4,8 @@ namespace KHBankTools\PaymentGateway;
 
 class SignatureProvider
 {
-    private $privateKeyPath;
-    private $privateKeyPassphrase;
+    private string $privateKeyPath;
+    private string $privateKeyPassphrase;
     private $privateKey;
     
     public function __construct(string $privateKeyPath, string $privateKeyPassphrase = '', bool $lazyKeyload = true)
