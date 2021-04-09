@@ -134,6 +134,6 @@ class PaymentGateway
     
     public function getPaymentResult(TransactionInterface $transaction): PaymentResult
     {
-        return PaymentResult::initWithResponeString($this->fetchPaymentStatus($transaction));
+        return PaymentResult::initWithResponseString($this->fetchPaymentStatus($transaction));
     }
 }
