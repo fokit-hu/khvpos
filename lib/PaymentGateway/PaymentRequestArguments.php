@@ -60,7 +60,7 @@ class PaymentRequestArguments
         throw new \LogicException(sprintf('Unknown currency: "%s".', $transaction->getCurrency()));
     }
     
-    private $merchantId;
+    private int $merchantId;
     
     public function setMerchantId(int $merchantId): self
     {
@@ -74,7 +74,7 @@ class PaymentRequestArguments
         return $this->merchantId;
     }
     
-    private $transactionId;
+    private int $transactionId;
     
     public function setTransactionId(int $transactionId): self
     {
@@ -92,7 +92,7 @@ class PaymentRequestArguments
         return $this->transactionId;
     }
     
-    private $paymentType;
+    private string $paymentType;
     
     public function setPaymentType(string $paymentType): self
     {
@@ -110,7 +110,7 @@ class PaymentRequestArguments
         return $this->paymentType;
     }
     
-    private $amount;
+    private ?int $amount;
     
     public function setAmount(int $amount): self
     {
@@ -124,7 +124,7 @@ class PaymentRequestArguments
         return $this->amount;
     }
     
-    private $currency;
+    private ?string $currency;
     
     public function setCurrency(string $currency): self
     {
