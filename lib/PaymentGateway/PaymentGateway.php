@@ -30,7 +30,8 @@ class PaymentGateway
         self::LANGUAGE_CODE_SK,
     ];
     
-    const VERSION = 'v1';
+    const VERSION_LEGACY = 'legacy';
+    const VERSION_V1 = 'v1';
     const PAYMENT_ENDPOINT_PATH = '/PGPayment';
     const RESULT_ENDPOINT_PATH = '/PGResult';
     
@@ -38,9 +39,11 @@ class PaymentGateway
     private int $merchantId;
     private bool $isTest;
     private ?ClientInterface $httpClient;
-    
-    public function __construct(int $merchantId, SignatureProvider $signatureProvider, bool $isTest = false, ClientInterface $httpClient = null)
+    private string $version;
+
+    public function __construct(string $version, int $merchantId, SignatureProvider $signatureProvider, bool $isTest = false, ClientInterface $httpClient = null)
     {
+        $this->version = $version;
         $this->merchantId = $merchantId;
         $this->signatureProvider = $signatureProvider;
         $this->isTest = $isTest;
@@ -49,7 +52,13 @@ class PaymentGateway
 
     protected function getEndpointBase(): string
     {
-        return 'https://pay.'. ($this->isTest ? 'sandbox.' : '').'khpos.hu/pay/'.self::VERSION;
+        if ($this->version === self::VERSION_LEGACY) {
+            return 'https://ebank.khb.hu/PaymentGateway'. ($this->isTest ? 'Test' : '');;
+        }
+        elseif ($this->version === self::VERSION_V1) {
+            return 'https://pay.'. ($this->isTest ? 'sandbox.' : '').'khpos.hu/pay/v1';
+        }
+
     }
     
     private function buildQuery(PaymentRequestArguments $arguments, ?string $languageCode = null): string
