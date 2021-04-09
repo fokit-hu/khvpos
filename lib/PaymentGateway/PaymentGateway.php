@@ -29,9 +29,14 @@ class PaymentGateway
         self::LANGUAGE_CODE_RO,
         self::LANGUAGE_CODE_SK,
     ];
-    
+
     const VERSION_LEGACY = 'legacy';
     const VERSION_V1 = 'v1';
+    const VERSIONS = [
+        self::VERSION_LEGACY,
+        self::VERSION_V1
+    ];
+
     const PAYMENT_ENDPOINT_PATH = '/PGPayment';
     const RESULT_ENDPOINT_PATH = '/PGResult';
     
