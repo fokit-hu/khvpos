@@ -47,7 +47,7 @@ class PaymentGateway
         $this->httpClient = $httpClient;
     }
 
-    protected function getEndpointBase()
+    protected function getEndpointBase(): string
     {
         return 'https://pay.'. ($this->isTest ? 'sandbox.' : '').'khpos.hu/pay/'.self::VERSION;
     }
@@ -79,7 +79,7 @@ class PaymentGateway
         return \http_build_query($queryArguments);
     }
     
-    private function transactionToPaymentRequestArguments(TransactionInterface $transaction, string $paymentType)
+    private function transactionToPaymentRequestArguments(TransactionInterface $transaction, string $paymentType): PaymentRequestArguments
     {
         if ($paymentType === PaymentRequestArguments::PAYMENT_RESULT_TYPE) {
             $paymentArguments = new PaymentRequestArguments($paymentType, $transaction->getId());
