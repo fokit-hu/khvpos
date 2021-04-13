@@ -26,10 +26,10 @@ class VPosClientTest extends TestCase
         $httpClient = new Psr18Client();
         $signatureProvider = new SignatureProvider(__DIR__.'/Fixtures/test1_private_key.pem');
 
-        $paymentGateway = new VPosClient(1234, 'EUR', $signatureProvider, true);
+        $paymentGateway = new VPosClient(VPosClient::VERSION_V1, 1234, $signatureProvider, true);
         $this->assertSame($this->callPrivateMethod($paymentGateway, 'getEndpointBase'), 'https://pay.sandbox.khpos.hu/pay/v1');
 
-        $paymentGateway = new VPosClient(1234, 'EUR', $signatureProvider, false);
+        $paymentGateway = new VPosClient(VPosClient::VERSION_V1, 1234, $signatureProvider, false);
         $this->assertSame($this->callPrivateMethod($paymentGateway, 'getEndpointBase'), 'https://pay.khpos.hu/pay/v1');
     }
     
@@ -44,7 +44,7 @@ class VPosClientTest extends TestCase
         $arguments = new PaymentRequestArguments(PaymentRequestArguments::PAYMENT_PURCHASE_TYPE, 1234, 12313, PaymentRequestArguments::CURRENCY_EUR);
         $arguments->setMerchantId(60000);
         
-        $paymentGateway = new VPosClient(60000, 'EUR', $signatureProvider, false);
+        $paymentGateway = new VPosClient(VPosClient::VERSION_V1, 60000, $signatureProvider, false);
         
         $this->assertSame($this->callPrivateMethod($paymentGateway, 'buildQuery', [$arguments, $languageCode]), $expectedQueryString);
     }
@@ -63,7 +63,7 @@ class VPosClientTest extends TestCase
     public function testTransactionToPaymentRequestArguments(TransactionInterface $transaction, string $paymentType, PaymentRequestArguments $requestArgument): void
     {
         $signatureProvider = new SignatureProvider(__DIR__.'/Fixtures/test1_private_key.pem');
-        $paymentGateway = new VPosClient(60000, 'EUR', $signatureProvider, false);
+        $paymentGateway = new VPosClient(VPosClient::VERSION_V1, 60000, $signatureProvider, false);
 
         $this->assertEquals($this->callPrivateMethod($paymentGateway, 'transactionToPaymentRequestArguments', [$transaction, $paymentType]), $requestArgument);
     }
@@ -93,7 +93,7 @@ class VPosClientTest extends TestCase
     public function testPaymentUrl(TransactionInterface $transaction, string $language, string $url): void
     {
         $signatureProvider = new SignatureProvider(__DIR__.'/Fixtures/test1_private_key.pem');
-        $paymentGateway = new VPosClient(60000, 'EUR', $signatureProvider, false);
+        $paymentGateway = new VPosClient(VPosClient::VERSION_V1, 60000, $signatureProvider, false);
         
         $this->assertSame($paymentGateway->paymentUrl($transaction, $language), $url);
     }
@@ -117,7 +117,7 @@ class VPosClientTest extends TestCase
     public function testRefundUrl(TransactionInterface $transaction, string $language, string $url): void
     {
         $signatureProvider = new SignatureProvider(__DIR__.'/Fixtures/test1_private_key.pem');
-        $paymentGateway = new VPosClient(60000, 'EUR', $signatureProvider, false);
+        $paymentGateway = new VPosClient( VPosClient::VERSION_V1, 60000, $signatureProvider, false);
         
         $this->assertSame($paymentGateway->refundUrl($transaction, $language), $url);
     }
@@ -143,7 +143,7 @@ class VPosClientTest extends TestCase
         $transaction->currency = TransactionInterface::TRANSACTION_EUR_CURRENCY;
 
         $signatureProvider = new SignatureProvider(__DIR__.'/Fixtures/test1_private_key.pem');
-        $paymentGateway = new VPosClient(60000, 'EUR', $signatureProvider, false);
+        $paymentGateway = new VPosClient(VPosClient::VERSION_V1, 60000, $signatureProvider, false);
         
         $this->assertSame($paymentGateway->paymentResultCheckUrl($transaction), 'https://pay.khpos.hu/pay/v1/PGResult?mid=60000&txid=678');
     }
