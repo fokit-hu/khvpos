@@ -150,4 +150,16 @@ class VPosClient
     {
         return PaymentResult::initWithResponseString($this->fetchPaymentStatus($transaction));
     }
+
+    public function refundTransaction(TransactionInterface $transaction): PaymentResult
+    {
+        if ($this->httpClient === null) {
+            throw new \LogicException('http client not initialized for http request');
+        }
+
+        $request = $this->httpClient->createRequest('GET', $this->refundUrl($transaction));
+        $response = $this->httpClient->sendRequest($request);
+
+        return PaymentResult::initWithResponseString($response->getBody()->getContents());
+    }
 }
