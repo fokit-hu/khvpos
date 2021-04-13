@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace KHBankTools\Tests\PaymentGateway;
+namespace KHTools\Tests\VPos;
 
-use KHBankTools\PaymentGateway\PaymentRequestArguments;
+use KHTools\VPos\PaymentRequestArguments;
 use PHPUnit\Framework\TestCase;
 
 class PaymentRequestArgumentsTest extends TestCase

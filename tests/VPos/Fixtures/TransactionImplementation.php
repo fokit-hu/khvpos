@@ -1,8 +1,8 @@
 <?php
 
-namespace KHBankTools\Tests\PaymentGateway\Fixtures;
+namespace KHTools\Tests\VPos\Fixtures;
 
-use KHBankTools\PaymentGateway\TransactionInterface;
+use KHTools\VPos\TransactionInterface;
 
 class TransactionImplementation implements TransactionInterface
 {

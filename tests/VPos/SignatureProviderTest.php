@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace KHBankTools\Tests\PaymentGateway;
+namespace KHTools\Tests\VPos;
 
-use KHBankTools\PaymentGateway\PaymentGateway;
-use KHBankTools\PaymentGateway\PaymentRequestArguments;
-use KHBankTools\PaymentGateway\SignatureProvider;
+use KHTools\VPos\VPosClient;
+use KHTools\VPos\PaymentRequestArguments;
+use KHTools\VPos\SignatureProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\Psr18Client;
 

@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "KHBankTools\\PaymentGateway\\": "lib/"
+            "KHTools\\VPos\\": "VPos/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "KHBankTools\\Tests\\": "tests/"
+            "KHTools\\Tests\\": "tests/"
         }
     }
 }

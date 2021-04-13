@@ -1,6 +1,6 @@
 <?php
 
-namespace KHBankTools\PaymentGateway;
+namespace KHTools\VPos;
 
 class PaymentResult
 {

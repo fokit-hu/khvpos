@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace KHBankTools\PaymentGateway;
+namespace KHTools\VPos;
 
 class SignatureProvider
 {

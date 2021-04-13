@@ -1,10 +1,10 @@
 <?php
 
-namespace KHBankTools\PaymentGateway;
+namespace KHTools\VPos;
 
 use Psr\Http\Client\ClientInterface;
 
-class PaymentGateway
+class VPosClient
 {
     const LANGUAGE_CODE_DE = 'DE';
     const LANGUAGE_CODE_EN = 'EN';
@@ -124,7 +124,7 @@ class PaymentGateway
         
         return $url;
     }
-    
+
     public function paymentResultCheckUrl(TransactionInterface $transaction): string
     {
         $url = $this->getEndpointBase();
