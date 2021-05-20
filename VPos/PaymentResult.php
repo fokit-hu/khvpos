@@ -25,22 +25,22 @@ class PaymentResult
     private ?string $responseMessage = null;
 
     /**
-     * @var int
+     * @var string
      */
-    private int $bankLicenceNumber;
+    private string $bankLicenceNumber;
 
     /**
      * @var string|null
      */
     private ?string $emailAddress = null;
 
-    public function __construct(string $bankStatusString, ?string $responseCode, ?string $responseMessage, ?string $bankLicenceNumber, ?string $emailAddress)
+    public function __construct(string $bankStatusString, ?string $responseCode, ?string $responseMessage, ?string $bankLicenceNumber, ?string $emailAddress = null)
     {
         $this->status = self::bankStatusStringToTransactionStatus($bankStatusString);
         $this->statusString = $bankStatusString;
         $this->responseCode = (int) $responseCode;
         $this->responseMessage = $responseMessage;
-        $this->bankLicenceNumber = (int) $bankLicenceNumber;
+        $this->bankLicenceNumber = $bankLicenceNumber;
         $this->emailAddress = empty($emailAddress) ? null : $emailAddress;
     }
     
@@ -54,11 +54,11 @@ class PaymentResult
         $resultArray = \array_map('trim', $resultArray);
         
         if ($resultArray[0] === 'ACK' || $resultArray[0] === 'VOI') {
-            if (($numberOfLines = count($resultArray)) < 5) {
+            if (($numberOfLines = count($resultArray)) < 4) {
                 throw new \LogicException(sprintf('PaymentResult::initWithResponseString() Number of lines (%d) in response string is wrong: "%s"', $numberOfLines, $responseString));
             }
             
-            return new self($resultArray[0], $resultArray[1], $resultArray[2], $resultArray[3], $resultArray[4]);
+            return new self($resultArray[0], $resultArray[1], $resultArray[2], $resultArray[3], $resultArray[4] ?? null);
         }
 
         return new self($resultArray[0], null, null, null, null);
@@ -110,8 +110,13 @@ class PaymentResult
         return $this->responseMessage;
     }
     
-    public function getBankLicenceNumber(): int
+    public function getBankLicenceNumber(): string
     {
         return $this->bankLicenceNumber;
+    }
+
+    public function getEmailAddress(): ?string
+    {
+        return $this->emailAddress;
     }
 }
