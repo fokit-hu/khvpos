@@ -27,7 +27,7 @@ class PaymentResult
     /**
      * @var string
      */
-    private string $bankLicenceNumber;
+    private ?string $bankLicenceNumber = null;
 
     /**
      * @var string|null
