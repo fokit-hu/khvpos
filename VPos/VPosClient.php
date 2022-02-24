@@ -116,10 +116,14 @@ class VPosClient
         return $url;
     }
 
-    public function refundUrl(TransactionInterface $transaction, $languageCode = self::LANGUAGE_CODE_HU): string
+    public function refundUrl(TransactionInterface $transaction, float $amount = null, $languageCode = self::LANGUAGE_CODE_HU): string
     {
         $url = $this->getEndpointBase();
         $paymentArguments = $this->transactionToPaymentRequestArguments($transaction, PaymentRequestArguments::PAYMENT_REFUND_TYPE);
+        if ($amount !== null) {
+            // TODO check that amount not greater than amount of original transaction
+            $paymentArguments->setAmount((int) ($amount * 100));
+        }
         $url .= self::PAYMENT_ENDPOINT_PATH.'?'.$this->buildQuery($paymentArguments, $languageCode);
         
         return $url;
@@ -151,13 +155,13 @@ class VPosClient
         return PaymentResult::initWithResponseString($this->fetchPaymentStatus($transaction));
     }
 
-    public function refundTransaction(TransactionInterface $transaction): PaymentResult
+    public function refundTransaction(TransactionInterface $transaction, float $amount = null): PaymentResult
     {
         if ($this->httpClient === null) {
             throw new \LogicException('http client not initialized for http request');
         }
 
-        $request = $this->httpClient->createRequest('GET', $this->refundUrl($transaction));
+        $request = $this->httpClient->createRequest('GET', $this->refundUrl($transaction, $amount));
         $response = $this->httpClient->sendRequest($request);
 
         return PaymentResult::initWithResponseString($response->getBody()->getContents());

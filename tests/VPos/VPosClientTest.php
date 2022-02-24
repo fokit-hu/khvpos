@@ -119,7 +119,7 @@ class VPosClientTest extends TestCase
         $signatureProvider = new SignatureProvider(__DIR__.'/Fixtures/test1_private_key.pem');
         $paymentGateway = new VPosClient( VPosClient::VERSION_V1, 60000, $signatureProvider, false);
         
-        $this->assertSame($paymentGateway->refundUrl($transaction, $language), $url);
+        $this->assertSame($paymentGateway->refundUrl($transaction, null, $language), $url);
     }
     
     public function refundUrlDataProvider(): array
