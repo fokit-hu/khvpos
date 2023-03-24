@@ -52,16 +52,8 @@ class PaymentResult
         
         $resultArray = \explode("\n", $responseString);
         $resultArray = \array_map('trim', $resultArray);
-        
-        if ($resultArray[0] === 'ACK' || $resultArray[0] === 'VOI') {
-            if (($numberOfLines = count($resultArray)) < 4) {
-                throw new \LogicException(sprintf('PaymentResult::initWithResponseString() Number of lines (%d) in response string is wrong: "%s"', $numberOfLines, $responseString));
-            }
-            
-            return new self($resultArray[0], $resultArray[1], $resultArray[2], $resultArray[3], $resultArray[4] ?? null);
-        }
 
-        return new self($resultArray[0], null, null, null, null);
+        return new self($resultArray[0], $resultArray[1] ?? null, $resultArray[2] ?? null, $resultArray[3] ?? null, $resultArray[4] ?? null);
     }
     
     public static function bankStatusStringToTransactionStatus($string): int
