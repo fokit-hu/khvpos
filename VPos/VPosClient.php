@@ -2,6 +2,7 @@
 
 namespace KHTools\VPos;
 
+use phpDocumentor\Reflection\Types\Integer;
 use Psr\Http\Client\ClientInterface;
 
 class VPosClient
@@ -57,13 +58,11 @@ class VPosClient
 
     protected function getEndpointBase(): string
     {
-        if ($this->version === self::VERSION_LEGACY) {
-            return 'https://ebank.khb.hu/PaymentGateway'. ($this->isTest ? 'Test' : '');;
-        }
-        elseif ($this->version === self::VERSION_V1) {
-            return 'https://pay.'. ($this->isTest ? 'sandbox.' : '').'khpos.hu/pay/v1';
-        }
-
+        return match ($this->version) {
+            self::VERSION_LEGACY => 'https://ebank.khb.hu/PaymentGateway'. ($this->isTest ? 'Test' : ''),
+            self::VERSION_V1 => 'https://pay.'. ($this->isTest ? 'sandbox.' : '').'khpos.hu/pay/v1',
+            default => throw new \RuntimeException(sprintf('Invalid version: "%s"', $this->version)),
+        };
     }
     
     private function buildQuery(PaymentRequestArguments $arguments, ?string $languageCode = null): string
