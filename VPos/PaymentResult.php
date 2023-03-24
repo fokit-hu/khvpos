@@ -102,7 +102,7 @@ class PaymentResult
         return $this->responseMessage;
     }
     
-    public function getBankLicenceNumber(): string
+    public function getBankLicenceNumber(): ?string
     {
         return $this->bankLicenceNumber;
     }
