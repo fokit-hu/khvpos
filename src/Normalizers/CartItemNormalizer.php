@@ -15,7 +15,7 @@ class CartItemNormalizer implements NormalizerInterface
     {
     }
 
-    public function normalize(mixed $object, string $format = null, array $context = [])
+    public function normalize(mixed $object, string $format = null, array $context = []): array
     {
         $normalized = $this->objectNormalizer->normalize($object, $format, [
             AbstractObjectNormalizer::CALLBACKS => [
@@ -37,7 +37,7 @@ class CartItemNormalizer implements NormalizerInterface
         ]);
     }
 
-    public function supportsNormalization(mixed $data, string $format = null): bool
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return $data instanceof CartItem;
     }

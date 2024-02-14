@@ -15,12 +15,12 @@ class EnumNormalizer implements NormalizerInterface, DenormalizerInterface
      * @param array $context
      * @return string
      */
-    public function normalize(mixed $object, string $format = null, array $context = [])
+    public function normalize(mixed $object, string $format = null, array $context = []): string
     {
         return $object->stringValue();
     }
 
-    public function supportsNormalization(mixed $data, string $format = null): bool
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return $data instanceof StringValueEnum;
     }
@@ -33,12 +33,12 @@ class EnumNormalizer implements NormalizerInterface, DenormalizerInterface
         ];
     }
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): object
     {
         return $type::initWithString($data);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null)
+    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return (class_implements($type)[StringValueEnum::class] ?? null) === StringValueEnum::class;
     }

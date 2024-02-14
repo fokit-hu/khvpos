@@ -9,12 +9,12 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class HttpErrorNormalizer implements DenormalizerInterface
 {
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): object
     {
         return new $type($data['resultMessage'] ?? 'missing', $data['resultCode'] ?? 0);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
+    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return $type === ClientErrorException::class || $type === ServerErrorException::class;
     }
