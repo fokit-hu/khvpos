@@ -1,6 +1,6 @@
 <?php
 
-namespace KHTools\Tests\VPos\Normalizers;
+namespace KHTools\Tests\Normalizers;
 
 use KHTools\VPos\Entities\CartItem;
 use KHTools\VPos\Entities\Customer;
