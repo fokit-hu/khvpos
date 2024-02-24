@@ -3,7 +3,7 @@ name: Tests
 on:
   pull_request:
     branches:
-      - master
+      - 2.x
     paths:
       - .github/workflows/tests.yml
       - composer.*
@@ -12,7 +12,7 @@ on:
 
   push:
     branches:
-      - master
+      - 2.x
     paths:
       - .github/workflows/tests.yml
       - composer.*
@@ -37,12 +37,13 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          tools: phpunit:11
 
       - run: composer validate
 
       - uses: "ramsey/composer-install@v2"
 
-      - run: composer run coverage:clover
+      - run: phpunit --colors=always --coverage-clover=coverage.xml
 
       - name: Upload to Codecov
         uses: codecov/codecov-action@v3
