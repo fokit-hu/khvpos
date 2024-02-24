@@ -16,6 +16,7 @@ use KHTools\VPos\Models\Merchant;
 use KHTools\VPos\Normalizers\CartItemNormalizer;
 use KHTools\VPos\Normalizers\EnumNormalizer;
 use KHTools\VPos\Normalizers\RequestNormalizer;
+use KHTools\VPos\Requests\EchoRequest;
 use KHTools\VPos\Requests\PaymentCloseRequest;
 use KHTools\VPos\Requests\PaymentInitRequest;
 use KHTools\VPos\Requests\PaymentProcessRequest;
@@ -185,13 +186,13 @@ class RequestNormalizerTest extends TestCase
                     'quantity' => 111,
                     'amount' => 1234500,
                     'description' => 'description of the item',
-                ]
+                ],
             ],
         ]];
 
         $customer = new Customer();
         $customer->account = new CustomerAccount();
-        $customer->account->changedAt = new \DateTime('2023-01-01T04:05:06+00:00');
+        $customer->account->changedAt = new \DateTimeImmutable('2023-01-01T04:05:06+00:00');
         $customer->login = new CustomerLogin();
         $customer->login->auth = CustomerLoginAuth::Api;
         $customer->name = 'name of the customer';
@@ -298,5 +299,20 @@ class RequestNormalizerTest extends TestCase
             'payId' => 'abc123',
             'amount' => 100000,
         ]];
+    }
+
+    public function testEchoRequest(): void
+    {
+        $request = new EchoRequest();
+        $request->setMerchant((new Merchant())->setMerchantId('abc123'));
+
+        $normalized = $this->normalizer->normalize($request);
+
+        $this->assertArrayHasKey('dttm', $normalized);
+        unset($normalized['dttm']);
+
+        $this->assertSame([
+            'merchantId' => 'abc123',
+        ], $normalized);
     }
 }
