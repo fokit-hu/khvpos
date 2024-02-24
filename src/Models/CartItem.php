@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace KHTools\VPos\Entities;
+namespace KHTools\VPos\Models;
 
 class CartItem
 {
@@ -62,7 +62,10 @@ class CartItem
         return $this->amount / 100;
     }
 
-    public function getRawAmount(): int
+    /**
+     * @return int|null
+     */
+    public function getRawAmount(): ?int
     {
         return $this->amount;
     }
