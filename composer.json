@@ -1,5 +1,5 @@
 {
-    "name": "connorhu/khvpos",
+    "name": "fokit-hu/khvpos",
     "description": "Helper tools for working with K&H src/VPos",
     "license": "MIT",
     "type": "library",
